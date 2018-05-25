@@ -1,0 +1,13 @@
+Source: sw-go-tools
+Section: utils
+Priority: optional
+Maintainer: Deepin Packages Builder <packages@deepin.com>
+Build-Depends: debhelper (>=9)
+Standards-Version: 3.9.6
+Homepage: https://www.deepin.org/
+
+Package: sw-go-tools
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}, perl
+Description: sw go tools
+ Go build tools for dde
