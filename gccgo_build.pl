@@ -88,7 +88,7 @@ if (!defined $opts{o}) {
 my $output = $opts{o};
 my $pkg_config_pkg_names = $opts{p} // "";
 my $extra_gccgo_flags = $opts{f} // "";
-my $extra_gccgo_libs_flags = $opts{l} // "";
+my $extra_gccgo_libs = $opts{l} // "";
 
 say "output: $output";
 say "pkg-config pkg_names: $pkg_config_pkg_names";
@@ -99,6 +99,8 @@ my $part_gccgo_flags = get_part_gccgo_flags($pkg_config_pkg_names);
 if ($use_new_gccgo) {
     $gccgoflags = "-Wl,--dynamic-linker=/lib/ld-linux.so.2 $part_gccgo_flags $extra_gccgo_flags";
 } else {
+	my @libs = split /\s/, $extra_gccgo_libs;
+	my $extra_gccgo_libs_flags = join(" ", map { "-l".$_ } @libs);
     $gccgoflags = "$part_gccgo_flags $extra_gccgo_flags $extra_gccgo_libs_flags";
 }
 
